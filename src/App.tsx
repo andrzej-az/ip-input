@@ -8,6 +8,7 @@ function App() {
         <h1 className="text-3xl font-bold">React+shadcn+vite</h1>
         <Switch />
         <Input />
+        <Switch />
         <IPut />
       </div>
     </>
