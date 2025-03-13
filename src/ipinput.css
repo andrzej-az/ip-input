@@ -1,12 +1,21 @@
 .react-ip-input {
-  display: inline-block;
+  display: flex;
   /* border: 1px solid #c2c3c9;
   border-radius: 4px;
   padding: 5px 8px; */
+  min-width: 180px
+  /* align-items: center; */
 }
 
 .react-ip-input .react-ip-input__item {
-  display: inline-block;
+  display: flex;
+  align-items:center;
+  width: 25%;
+  caret-color: transparent
+}
+.react-ip-input .react-ip-input__item  input{
+  caret-color: initial
+
 }
 
 .react-ip-input.has-error {
@@ -15,7 +24,7 @@
 }
 
 .react-ip-input input {
-  width: 32px;
+  min-width: 32px;
   border: none;
   outline: none;
   text-align: center;
