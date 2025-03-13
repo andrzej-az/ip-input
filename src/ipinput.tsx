@@ -139,7 +139,7 @@ export default class IPut extends Component<IPutProps, IPutState> {
         )}
       >
         {value.map((val, i) => (
-          <div className="react-ip-input__item" key={i}>
+          <div contentEditable={false} className="react-ip-input__item" key={i}>
             <input
               ref={this.inputRefs[i]}
               type="text"
@@ -150,7 +150,7 @@ export default class IPut extends Component<IPutProps, IPutState> {
               onBlur={this.handleBlur}
               onFocus={this.handleFocus}
             />
-            {i !== 3 && <i>.</i>}
+            {i !== 3 && <div>.</div>}
           </div>
         ))}
       </div>
