@@ -34,10 +34,12 @@ export default class IPut extends Component<IPutProps, IPutState> {
   };
 
   private inputRefs: React.RefObject<HTMLInputElement>[];
+  private ipInputRef: React.RefObject<HTMLDivElement>;
 
   constructor(props: IPutProps) {
     super(props);
     this.state = { value: [] };
+    this.ipInputRef = createRef<HTMLDivElement>();
     this.inputRefs = Array(4)
       .fill(null)
       .map(() => createRef<HTMLInputElement>());
@@ -66,6 +68,9 @@ export default class IPut extends Component<IPutProps, IPutState> {
     }
   };
   handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    if (this.ipInputRef?.current != null) {
+      this.ipInputRef.current.classList.add("focused");
+    }
     e.target.select();
   };
 
@@ -112,6 +117,12 @@ export default class IPut extends Component<IPutProps, IPutState> {
       .map((val) => (isNaN(Number(val)) ? "" : val))
       .join(".");
     this.props.onBlur?.(ip);
+    for (let i = 0; i < 4; i++) {
+      if (this.inputRefs[i]?.current === document.activeElement) {
+        return;
+      }
+    }
+    this.ipInputRef?.current?.classList.remove("focused");
   };
 
   onPropsChange = () => {
@@ -133,8 +144,9 @@ export default class IPut extends Component<IPutProps, IPutState> {
 
     return (
       <div
+        ref={this.ipInputRef}
         className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focusable",
           className
         )}
       >
