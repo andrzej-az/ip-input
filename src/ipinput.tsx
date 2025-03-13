@@ -1,8 +1,8 @@
 import React, { Component, createRef } from "react";
 import PropTypes from "prop-types";
 import { getCursorPosition, isValidIPSegment } from "./helper";
-import { Input } from "./components/input";
 import "./ipinput.css";
+import { cn } from "./lib/utils";
 
 interface IPutProps {
   className?: string;
@@ -56,7 +56,7 @@ export default class IPut extends Component<IPutProps, IPutState> {
   }
 
   handleChange = (e: React.ChangeEvent<HTMLInputElement>, i: number) => {
-    let val = parseInt(e.target.value, 10);
+    let val: number | string = parseInt(e.target.value, 10);
     val = isNaN(val) || !isValidIPSegment(val) ? "" : val;
     const value = [...this.state.value];
     value[i] = val;
@@ -138,7 +138,6 @@ export default class IPut extends Component<IPutProps, IPutState> {
           className
         )}
       >
-        {console.log(value)}
         {value.map((val, i) => (
           <div className="react-ip-input__item" key={i}>
             <input
